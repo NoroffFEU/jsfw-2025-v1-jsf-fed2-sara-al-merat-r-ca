@@ -7,7 +7,13 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ContactPage from "./pages/ContactPage";
 import { CartProvider } from "./context/CartContext";
-
+/*
+  The root component of the application.
+  This file sets up the global routing structure using React Router,
+  nesting all main pages inside the shared <Layout /> component.
+  It also wraps the entire application in the <CartProvider />, 
+  ensuring that the global shopping cart state is accessible from any page.
+ */
 function App() {
   return (
     <CartProvider>

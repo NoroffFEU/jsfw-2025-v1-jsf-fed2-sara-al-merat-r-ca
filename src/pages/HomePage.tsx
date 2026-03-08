@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import type { Product, ApiResponse } from '../types'; 
 
 const apiUrl = 'https://v2.api.noroff.dev/online-shop';
-
+/*
+  The main landing page of the application.
+  This component fetches the full list of products from the Noroff API on mount.
+  It manages local state for a search query and a sorting preference, and uses 
+  `useMemo` to efficiently filter and sort the displayed products without 
+  unnecessary re-renders.
+ */
 function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -153,7 +159,7 @@ function HomePage() {
                   </div>
                 </div>
                 
-                {/* Pricing Logic: Showing both prices and strike-through */}
+                {/*Showing both prices and strike-through */}
                 <div className="flex items-end gap-2 mt-auto pt-4">
                   {hasDiscount ? (
                     <>

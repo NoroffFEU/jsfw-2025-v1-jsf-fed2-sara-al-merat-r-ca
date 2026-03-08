@@ -5,7 +5,13 @@ import type { Product, SingleProductResponse } from '../types';
 import { useCart } from '../hooks/useCart'; 
 
 const API_BASE_URL = 'https://v2.api.noroff.dev/online-shop';
-
+/*
+  The individual product details page.
+  This component extracts the product ID from the URL parameters and fetches
+  the specific product data from the Noroff API. It manages local loading and 
+  error states, calculates discount percentages, and connects to the global 
+  CartContext to allow users to add the item to their shopping cart.
+ */
 function ProductPage() {
   const { id } = useParams<{ id: string }>();
   

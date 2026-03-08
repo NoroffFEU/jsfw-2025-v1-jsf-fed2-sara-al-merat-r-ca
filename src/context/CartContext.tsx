@@ -15,6 +15,11 @@ export interface CartContextType {
 // eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext<CartContextType | undefined>(undefined);
 
+/*
+  The Provider component that wraps your application.
+  It manages the actual state of the shopping cart, handles all the logic 
+  for adding/removing items, and automatically calculates the totals.
+ */
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 

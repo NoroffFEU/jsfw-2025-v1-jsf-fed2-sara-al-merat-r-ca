@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# Aurora Shop - E-Commerce Application
+This was a COLLABORATION between the students Sara Al and Merat Rezvany. 
+A fully functional front-end e-commerce web application built as an assignment for Noroff. This project simulates a real-world online store where users can browse products, search and filter results, view individual product details, manage a shopping cart, and complete a simulated checkout.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+* **Product Browsing:** Fetches and displays a dynamic list of products from the Noroff API.
+* **Search & Sort:** Instantly filter products by name or sort them by price and rating using optimized local state.
+* **Global Shopping Cart:** Add, remove, and update quantities of items from anywhere in the app using React Context.
+* **Discount Calculations:** Automatically calculates and displays discount percentages and total cart savings.
+* **Form Validation:** A functional contact form with strict client-side validation for emails, names, and message lengths.
+* **Responsive Design:** Fully styled with Tailwind CSS to ensure a seamless experience on mobile, tablet, and desktop screens.
 
-Currently, two official plugins are available:
+## Built With
+* [React](https://reactjs.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Vite](https://vitejs.dev/)
+* [Tailwind CSS (v4)](https://tailwindcss.com/)
+* [React Router](https://reactrouter.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
+To get a local copy up and running, follow these simple steps.
 
-## React Compiler
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) and [GitHub Desktop](https://desktop.github.com/) installed on your machine.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Installation
+1. Open **GitHub Desktop**.
+2. Go to **File** > **Clone repository...** 
+3. Select the **URL** tab and paste the link to this repository.(https://github.com/NoroffFEU/jsfw-2025-v1-jsf-fed2-sara-al-merat-r-ca.git)
+4. Choose your preferred local path and click **Clone**.
+5. Once cloned, click **Repository** > **Open in Visual Studio Code** (or your preferred editor).
+6. Open your editor's integrated terminal and run the following command to install the necessary dependencies:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+```
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### AUTHORS
+Sara Al & Merat Rezvany
