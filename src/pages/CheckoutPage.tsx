@@ -5,10 +5,11 @@ import { useCart } from '../hooks/useCart';
 function CheckoutPage() {
   const { clearCart } = useCart();
 
-  // 1. Automatically clear the cart when the user reaches this page
+// 1. Automatically clear the cart when the user reaches this page
   useEffect(() => {
     clearCart();
-  }, [clearCart]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="grow flex flex-col items-center justify-center min-h-[60vh] text-center gap-8">
