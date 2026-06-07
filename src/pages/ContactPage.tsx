@@ -95,7 +95,7 @@ function ContactPage() {
     <div className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto py-8">
       
       <div className="text-center mb-10">
-        <h1 className="text-4xl md:text-5xl font-black text-indigo-950 tracking-tight mb-4">
+        <h1 id="contact-page-heading" className="text-4xl md:text-5xl font-black text-indigo-950 tracking-tight mb-4">
           Contact Us
         </h1>
         <p className="text-lg text-gray-600">
@@ -106,13 +106,20 @@ function ContactPage() {
       <div className="w-full bg-white rounded-3xl border-2 border-gray-200 p-8 md:p-12 shadow-sm">
         
         {isSubmitted && (
-          <div className="mb-8 p-4 bg-green-100 border-2 border-green-500 rounded-xl flex items-center gap-3 text-green-800 font-bold">
+          <div
+            role="status"
+            aria-live="polite"
+            aria-labelledby="contact-success-heading"
+            className="mb-8 p-4 bg-green-100 border-2 border-green-500 rounded-xl flex items-center gap-3 text-green-800 font-bold">
             <span className="text-2xl">✓</span>
-            <p>Thank you for reaching out! Your message has been sent.</p>
+            <div>
+              <p id="contact-success-heading" className="font-bold">Message sent successfully</p>
+              <p>Thank you for reaching out! Your message has been sent.</p>
+            </div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} aria-labelledby="contact-page-heading" className="flex flex-col gap-6">
           
           {/* Full Name Field */}
           <div className="flex flex-col gap-2">
@@ -126,13 +133,19 @@ function ContactPage() {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Jane Doe"
+              aria-invalid={errors.fullName ? 'true' : undefined}
+              aria-describedby={errors.fullName ? 'fullName-error' : undefined}
               className={`px-4 py-3 rounded-xl border-2 transition-all focus:outline-none focus:ring-4 ${
                 errors.fullName 
                   ? 'border-red-400 focus:border-red-500 focus:ring-red-100 bg-red-50' 
                   : 'border-gray-200 focus:border-indigo-500 focus:ring-indigo-100 bg-gray-50'
               }`}
             />
-            {errors.fullName && <p className="text-red-500 text-sm font-bold">{errors.fullName}</p>}
+            {errors.fullName && (
+              <p id="fullName-error" className="text-red-500 text-sm font-bold" role="alert">
+                {errors.fullName}
+              </p>
+            )}
           </div>
 
           {/* Subject Field */}
@@ -147,13 +160,19 @@ function ContactPage() {
               value={formData.subject}
               onChange={handleChange}
               placeholder="Order Inquiry"
+              aria-invalid={errors.subject ? 'true' : undefined}
+              aria-describedby={errors.subject ? 'subject-error' : undefined}
               className={`px-4 py-3 rounded-xl border-2 transition-all focus:outline-none focus:ring-4 ${
                 errors.subject 
                   ? 'border-red-400 focus:border-red-500 focus:ring-red-100 bg-red-50' 
                   : 'border-gray-200 focus:border-indigo-500 focus:ring-indigo-100 bg-gray-50'
               }`}
             />
-            {errors.subject && <p className="text-red-500 text-sm font-bold">{errors.subject}</p>}
+            {errors.subject && (
+              <p id="subject-error" className="text-red-500 text-sm font-bold" role="alert">
+                {errors.subject}
+              </p>
+            )}
           </div>
 
           {/* Email Field */}
@@ -168,13 +187,19 @@ function ContactPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="jane@example.com"
+              aria-invalid={errors.email ? 'true' : undefined}
+              aria-describedby={errors.email ? 'email-error' : undefined}
               className={`px-4 py-3 rounded-xl border-2 transition-all focus:outline-none focus:ring-4 ${
                 errors.email 
                   ? 'border-red-400 focus:border-red-500 focus:ring-red-100 bg-red-50' 
                   : 'border-gray-200 focus:border-indigo-500 focus:ring-indigo-100 bg-gray-50'
               }`}
             />
-            {errors.email && <p className="text-red-500 text-sm font-bold">{errors.email}</p>}
+            {errors.email && (
+              <p id="email-error" className="text-red-500 text-sm font-bold" role="alert">
+                {errors.email}
+              </p>
+            )}
           </div>
 
           {/* Body/Message Field */}
@@ -189,13 +214,19 @@ function ContactPage() {
               onChange={handleChange}
               rows={5}
               placeholder="How can we help you today?"
+              aria-invalid={errors.body ? 'true' : undefined}
+              aria-describedby={errors.body ? 'body-error' : undefined}
               className={`px-4 py-3 rounded-xl border-2 transition-all focus:outline-none focus:ring-4 resize-none ${
                 errors.body 
                   ? 'border-red-400 focus:border-red-500 focus:ring-red-100 bg-red-50' 
                   : 'border-gray-200 focus:border-indigo-500 focus:ring-indigo-100 bg-gray-50'
               }`}
             />
-            {errors.body && <p className="text-red-500 text-sm font-bold">{errors.body}</p>}
+            {errors.body && (
+              <p id="body-error" className="text-red-500 text-sm font-bold" role="alert">
+                {errors.body}
+              </p>
+            )}
           </div>
 
           {/* Submit Button */}

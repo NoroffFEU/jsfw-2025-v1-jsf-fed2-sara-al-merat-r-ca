@@ -12,23 +12,32 @@ function Layout() {
       <header className="bg-indigo-900 text-[#f8f5e6] border-b-4 border-indigo-700/50 border-dashed shadow-sm relative overflow-hidden">
         <div className="absolute inset-0 opacity-10  pattern-repeat"></div>
 
-        <nav className="container mx-auto px-6 py-6 flex justify-between items-center relative z-10">
-          <Link to="/" className="text-3xl font-black tracking-tight hover:text-orange-200 transition-colors">
+        <nav aria-label="Primary navigation" className="container mx-auto px-6 py-6 flex justify-between items-center relative z-10">
+          <Link to="/" aria-label="Aurora Shop homepage" className="text-3xl font-black tracking-tight hover:text-orange-200 transition-colors">
            Aurora Shop.
           </Link>
           <ul className="flex space-x-8 font-bold tracking-wide text-lg">
             <li>
-              <Link to="/" className="hover:bg-orange-200/20 px-2 py-1 rounded-md transition-all -rotate-1 inline-block hover:rotate-0">
+              <Link
+                to="/"
+                aria-label="Go to home page"
+                className="hover:bg-orange-200/20 px-2 py-1 rounded-md transition-all -rotate-1 inline-block hover:rotate-0">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="hover:bg-orange-200/20 px-2 py-1 rounded-md transition-all rotate-1 inline-block hover:rotate-0">
+              <Link
+                to="/contact"
+                aria-label="Go to contact page"
+                className="hover:bg-orange-200/20 px-2 py-1 rounded-md transition-all rotate-1 inline-block hover:rotate-0">
                 Contact
               </Link>
             </li>
             <li>
-              <Link to="/cart" className="hover:bg-orange-200/20 px-2 py-1 rounded-md transition-all -rotate-1 inline-block hover:rotate-0">
+              <Link
+                to="/cart"
+                aria-label={`Cart with ${itemCount} item${itemCount === 1 ? '' : 's'}`}
+                className="hover:bg-orange-200/20 px-2 py-1 rounded-md transition-all -rotate-1 inline-block hover:rotate-0">
                 Cart ({itemCount})
               </Link>
             </li>

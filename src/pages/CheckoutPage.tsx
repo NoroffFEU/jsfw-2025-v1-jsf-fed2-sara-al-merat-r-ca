@@ -14,19 +14,22 @@ function CheckoutPage() {
   return (
     <div className="grow flex flex-col items-center justify-center min-h-[60vh] text-center gap-8">
       
-      {/* Success Icon using a simple Grid stack */}
-      <div className="grid place-items-center w-24 h-24 bg-green-100 rounded-full border-4 border-green-500 animate-bounce">
-        <span className="text-4xl text-green-600 font-black">✓</span>
-      </div>
+      <section role="status" aria-live="polite" aria-labelledby="checkout-success-heading" className="flex flex-col items-center gap-6">
+        {/* Success Icon using a simple Grid stack */}
+        <div className="grid place-items-center w-24 h-24 bg-green-100 rounded-full border-4 border-green-500 animate-bounce">
+          <span className="text-4xl text-green-600 font-black">✓</span>
+        </div>
 
-      <div className="flex flex-col gap-4 max-w-lg">
-        <h1 className="text-5xl font-black text-indigo-950 tracking-tight">
-          Order Successful!
-        </h1>
+        <div className="flex flex-col gap-4 max-w-lg">
+          <h1 id="checkout-success-heading" className="text-5xl font-black text-indigo-950 tracking-tight">
+            Order Successful!
+          </h1>
         <p className="text-xl text-gray-600 leading-relaxed">
           Thank you for shopping with <span className="font-bold text-indigo-900">Aurora Shop.</span> Your items are being prepared for shipping and will be with you shortly.
         </p>
       </div>
+
+      </section>
 
       {/* Decorative Divider */}
       <div className="w-24 h-1 bg-indigo-200 rounded-full"></div>

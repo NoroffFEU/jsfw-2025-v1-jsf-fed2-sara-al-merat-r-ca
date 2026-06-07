@@ -90,17 +90,19 @@ function HomePage() {
         </h1>
         
         {/* Search and Sort Inputs */}
-        <div className="flex flex-col sm:flex-row gap-4 ">
+        <div className="flex flex-col sm:flex-row gap-4 " role="search" aria-label="Product filters">
           <input
             type="text"
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search products"
             className="px-4 py-2 rounded-xl border-2 border-gray-300 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition-all"
           />
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
+            aria-label="Sort products"
             className="px-4 py-2 rounded-xl border-2 border-gray-300 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition-all bg-white cursor-pointer"
           >
             <option value="default">Default</option>
@@ -112,7 +114,7 @@ function HomePage() {
       </div>
       
       {/* Results Count */}
-      <p className="text-gray-600 font-medium">
+      <p className="text-gray-600 font-medium" aria-live="polite">
         Showing {filteredAndSortedProducts.length} products
       </p>
 
@@ -191,7 +193,7 @@ function HomePage() {
       </div>
 
       {filteredAndSortedProducts.length === 0 && !isLoading && (
-        <div className="text-center py-12">
+        <div role="status" aria-live="polite" className="text-center py-12">
           <p className="text-xl text-gray-500 font-medium">No products found matching your search.</p>
         </div>
       )}

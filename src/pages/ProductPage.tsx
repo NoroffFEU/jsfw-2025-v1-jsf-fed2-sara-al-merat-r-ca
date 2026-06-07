@@ -55,7 +55,9 @@ function ProductPage() {
   if (isLoading) {
     return (
       <div className="grow flex items-center justify-center min-h-96">
-        <p className="text-2xl font-bold animate-pulse text-indigo-900">Loading details...</p>
+        <p role="status" aria-live="polite" className="text-2xl font-bold animate-pulse text-indigo-900">
+          Loading details...
+        </p>
       </div>
     );
   }
@@ -63,10 +65,13 @@ function ProductPage() {
   if (error || !product) {
     return (
       <div className="grow flex flex-col items-center justify-center min-h-96 gap-6">
-        <p className="text-xl font-bold text-red-600 bg-red-100 p-6 rounded-xl border-2 border-red-300">
+        <p role="alert" className="text-xl font-bold text-red-600 bg-red-100 p-6 rounded-xl border-2 border-red-300">
           {error || 'Product not found.'}
         </p>
-        <Link to="/" className="text-indigo-900 font-bold underline hover:text-orange-500">
+        <Link
+          to="/"
+          aria-label="Go back to shop"
+          className="text-indigo-900 font-bold underline hover:text-orange-500">
           &larr; Back to Shop
         </Link>
       </div>
@@ -90,9 +95,12 @@ function ProductPage() {
   };
 
   return (
-    <div className="flex flex-col gap-12 w-full max-w-6xl mx-auto">
+    <div role="main" aria-labelledby="product-title" className="flex flex-col gap-12 w-full max-w-6xl mx-auto">
       
-      <Link to="/" className="text-indigo-900 font-bold hover:text-orange-500 transition-colors w-fit px-4 py-2 bg-indigo-100 rounded-lg">
+      <Link
+        to="/"
+        aria-label="Go back to shop"
+        className="text-indigo-900 font-bold hover:text-orange-500 transition-colors w-fit px-4 py-2 bg-indigo-100 rounded-lg">
         &larr; Back to Shop
       </Link>
 
@@ -124,7 +132,7 @@ function ProductPage() {
           )}
 
           <div>
-            <h1 className="text-4xl lg:text-5xl font-black text-indigo-950 tracking-tight mb-4">
+            <h1 id="product-title" className="text-4xl lg:text-5xl font-black text-indigo-950 tracking-tight mb-4">
               {product.title}
             </h1>
             <div className="flex items-center gap-2 text-lg font-bold text-amber-600">
@@ -161,14 +169,15 @@ function ProductPage() {
           </div>
 
 
-          <button 
+          <button
             onClick={handleAddToCart}
+            aria-live="polite"
+            aria-label={added ? 'Product added to cart' : 'Add product to cart'}
             className={`mt-4 w-full md:w-auto px-10 py-4 rounded-xl text-xl font-black transition-colors shadow-md hover:shadow-xl ${
               added 
                 ? 'bg-green-600 text-white hover:bg-green-700' 
                 : 'bg-orange-500 text-white hover:bg-indigo-900'
-            }`}
-          >
+            }`}>
             {added ? '✓ Added to Cart!' : 'Add to Cart'}
           </button>
         </div>
@@ -190,7 +199,9 @@ function ProductPage() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-500 italic text-lg">No reviews yet for this product.</p>
+          <p role="status" aria-live="polite" className="text-gray-500 italic text-lg">
+            No reviews yet for this product.
+          </p>
         )}
       </div>
 
