@@ -75,7 +75,9 @@ function CartPage() {
                       aria-label={`Decrease quantity of ${item.title}`}>
                       -
                     </button>
-                    <span className="font-bold w-4 text-center" aria-live="polite">
+                    <span
+                      className="font-bold w-4 text-center"
+                      aria-live="polite">
                       {item.quantity}
                     </span>
                     <button
@@ -101,7 +103,9 @@ function CartPage() {
           <div
             className="bg-white rounded-3xl border-2 border-gray-200 p-8 sticky top-8 shadow-sm"
             aria-labelledby="order-summary-heading">
-            <h2 id="order-summary-heading" className="text-2xl font-black text-indigo-950 mb-6">
+            <h2
+              id="order-summary-heading"
+              className="text-2xl font-black text-indigo-950 mb-6">
               Order Summary
             </h2>
 

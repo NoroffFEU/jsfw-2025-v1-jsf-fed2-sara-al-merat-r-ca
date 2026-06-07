@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import type { Product, ApiResponse } from '../types'; 
+import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+import type { Product, ApiResponse } from "../types";
 
-const apiUrl = 'https://v2.api.noroff.dev/online-shop';
+const apiUrl = "https://v2.api.noroff.dev/online-shop";
 /*
   The main landing page of the application.
   This component fetches the full list of products from the Noroff API on mount.
@@ -15,22 +15,22 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [sortOption, setSortOption] = useState<string>('default');
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [sortOption, setSortOption] = useState<string>("default");
 
   useEffect(() => {
     async function fetchProducts() {
       try {
         const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error('Failed to fetch products');
-        
+        if (!response.ok) throw new Error("Failed to fetch products");
+
         const json = (await response.json()) as ApiResponse;
         setProducts(json.data);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
         } else {
-          setError('An unknown error occurred');
+          setError("An unknown error occurred");
         }
       } finally {
         setIsLoading(false);
@@ -42,17 +42,17 @@ function HomePage() {
 
   const filteredAndSortedProducts = useMemo(() => {
     let result = products.filter((product) =>
-      product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      product.title.toLowerCase().includes(searchQuery.toLowerCase()),
     );
 
     switch (sortOption) {
-      case 'price-asc':
+      case "price-asc":
         result = result.sort((a, b) => a.discountedPrice - b.discountedPrice);
         break;
-      case 'price-desc':
+      case "price-desc":
         result = result.sort((a, b) => b.discountedPrice - a.discountedPrice);
         break;
-      case 'rating':
+      case "rating":
         result = result.sort((a, b) => b.rating - a.rating);
         break;
       default:
@@ -65,7 +65,9 @@ function HomePage() {
   if (isLoading) {
     return (
       <div className="grow flex items-center justify-center min-h-96">
-        <p className="text-2xl font-bold animate-pulse text-indigo-900">Loading shop...</p>
+        <p className="text-2xl font-bold animate-pulse text-indigo-900">
+          Loading shop...
+        </p>
       </div>
     );
   }
@@ -82,15 +84,17 @@ function HomePage() {
 
   return (
     <div className="flex flex-col gap-8 w-full">
-      
       {/* Header & Controls Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <h1 className="text-4xl font-black text-indigo-950 tracking-tight">
           Products
         </h1>
-        
+
         {/* Search and Sort Inputs */}
-        <div className="flex flex-col sm:flex-row gap-4 " role="search" aria-label="Product filters">
+        <div
+          className="flex flex-col sm:flex-row gap-4 "
+          role="search"
+          aria-label="Product filters">
           <input
             type="text"
             placeholder="Search products..."
@@ -103,8 +107,7 @@ function HomePage() {
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
             aria-label="Sort products"
-            className="px-4 py-2 rounded-xl border-2 border-gray-300 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition-all bg-white cursor-pointer"
-          >
+            className="px-4 py-2 rounded-xl border-2 border-gray-300 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 transition-all bg-white cursor-pointer">
             <option value="default">Default</option>
             <option value="price-asc">Low to High</option>
             <option value="price-desc"> High to Low</option>
@@ -112,7 +115,7 @@ function HomePage() {
           </select>
         </div>
       </div>
-      
+
       {/* Results Count */}
       <p className="text-gray-600 font-medium" aria-live="polite">
         Showing {filteredAndSortedProducts.length} products
@@ -122,22 +125,23 @@ function HomePage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredAndSortedProducts.map((product) => {
           const hasDiscount = product.discountedPrice < product.price;
-          const discountPercentage = hasDiscount 
-            ? Math.round(((product.price - product.discountedPrice) / product.price) * 100) 
+          const discountPercentage = hasDiscount
+            ? Math.round(
+                ((product.price - product.discountedPrice) / product.price) *
+                  100,
+              )
             : 0;
 
           return (
-            <div 
-              key={product.id} 
-              className="flex flex-col bg-white rounded-2xl border-2 border-gray-200 overflow-hidden hover:border-indigo-400 hover:shadow-xl transition-all duration-300"
-            >
+            <div
+              key={product.id}
+              className="flex flex-col bg-white rounded-2xl border-2 border-gray-200 overflow-hidden hover:border-indigo-400 hover:shadow-xl transition-all duration-300">
               {/* Image Container using Grid to stack elements */}
               <div className="grid aspect-square w-full bg-gray-50 overflow-hidden">
-                
                 {/* The Image (Layer 1) */}
-                <img 
-                  src={product.image.url} 
-                  alt={product.image.alt} 
+                <img
+                  src={product.image.url}
+                  alt={product.image.alt}
                   className="col-start-1 row-start-1 w-full h-full object-contain hover:scale-110 transition-transform duration-500"
                 />
 
@@ -149,7 +153,7 @@ function HomePage() {
                   </div>
                 )}
               </div>
-              
+
               {/* Content Container */}
               <div className="p-5 flex flex-col grow gap-3">
                 <div className="flex justify-between items-start gap-2">
@@ -160,7 +164,7 @@ function HomePage() {
                     ⭐ {product.rating}
                   </div>
                 </div>
-                
+
                 {/*Showing both prices and strike-through */}
                 <div className="flex items-end gap-2 mt-auto pt-4">
                   {hasDiscount ? (
@@ -178,12 +182,11 @@ function HomePage() {
                     </span>
                   )}
                 </div>
-                
+
                 {/* Action Button */}
-                <Link 
+                <Link
                   to={`/product/${product.id}`}
-                  className="mt-4 block w-full bg-indigo-900 text-[#f8f5e6] text-center font-bold py-3 rounded-xl hover:bg-orange-500 hover:text-white transition-colors"
-                >
+                  className="mt-4 block w-full bg-indigo-900 text-[#f8f5e6] text-center font-bold py-3 rounded-xl hover:bg-orange-500 hover:text-white transition-colors">
                   View Product
                 </Link>
               </div>
@@ -194,7 +197,9 @@ function HomePage() {
 
       {filteredAndSortedProducts.length === 0 && !isLoading && (
         <div role="status" aria-live="polite" className="text-center py-12">
-          <p className="text-xl text-gray-500 font-medium">No products found matching your search.</p>
+          <p className="text-xl text-gray-500 font-medium">
+            No products found matching your search.
+          </p>
         </div>
       )}
     </div>

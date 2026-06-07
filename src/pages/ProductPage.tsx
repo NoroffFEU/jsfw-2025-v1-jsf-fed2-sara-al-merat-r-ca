@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import type { Product, SingleProductResponse } from '../types';
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import type { Product, SingleProductResponse } from "../types";
 
-import { useCart } from '../hooks/useCart'; 
+import { useCart } from "../hooks/useCart";
 
-const API_BASE_URL = 'https://v2.api.noroff.dev/online-shop';
+const API_BASE_URL = "https://v2.api.noroff.dev/online-shop";
 /*
   The individual product details page.
   This component extracts the product ID from the URL parameters and fetches
@@ -14,10 +14,9 @@ const API_BASE_URL = 'https://v2.api.noroff.dev/online-shop';
  */
 function ProductPage() {
   const { id } = useParams<{ id: string }>();
-  
 
   const { addToCart } = useCart();
-  
+
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -29,9 +28,9 @@ function ProductPage() {
       try {
         setIsLoading(true);
         const response = await fetch(`${API_BASE_URL}/${id}`);
-        
+
         if (!response.ok) {
-          throw new Error('Could not fetch product details.');
+          throw new Error("Could not fetch product details.");
         }
 
         const json = (await response.json()) as SingleProductResponse;
@@ -40,7 +39,7 @@ function ProductPage() {
         if (err instanceof Error) {
           setError(err.message);
         } else {
-          setError('An unknown error occurred');
+          setError("An unknown error occurred");
         }
       } finally {
         setIsLoading(false);
@@ -55,7 +54,10 @@ function ProductPage() {
   if (isLoading) {
     return (
       <div className="grow flex items-center justify-center min-h-96">
-        <p role="status" aria-live="polite" className="text-2xl font-bold animate-pulse text-indigo-900">
+        <p
+          role="status"
+          aria-live="polite"
+          className="text-2xl font-bold animate-pulse text-indigo-900">
           Loading details...
         </p>
       </div>
@@ -65,8 +67,10 @@ function ProductPage() {
   if (error || !product) {
     return (
       <div className="grow flex flex-col items-center justify-center min-h-96 gap-6">
-        <p role="alert" className="text-xl font-bold text-red-600 bg-red-100 p-6 rounded-xl border-2 border-red-300">
-          {error || 'Product not found.'}
+        <p
+          role="alert"
+          className="text-xl font-bold text-red-600 bg-red-100 p-6 rounded-xl border-2 border-red-300">
+          {error || "Product not found."}
         </p>
         <Link
           to="/"
@@ -79,15 +83,15 @@ function ProductPage() {
   }
 
   const hasDiscount = product.discountedPrice < product.price;
-  const discountPercentage = hasDiscount 
-    ? Math.round(((product.price - product.discountedPrice) / product.price) * 100) 
+  const discountPercentage = hasDiscount
+    ? Math.round(
+        ((product.price - product.discountedPrice) / product.price) * 100,
+      )
     : 0;
-
 
   const handleAddToCart = () => {
     addToCart(product);
     setAdded(true);
-    
 
     setTimeout(() => {
       setAdded(false);
@@ -95,8 +99,10 @@ function ProductPage() {
   };
 
   return (
-    <div role="main" aria-labelledby="product-title" className="flex flex-col gap-12 w-full max-w-6xl mx-auto">
-      
+    <div
+      role="main"
+      aria-labelledby="product-title"
+      className="flex flex-col gap-12 w-full max-w-6xl mx-auto">
       <Link
         to="/"
         aria-label="Go back to shop"
@@ -105,26 +111,26 @@ function ProductPage() {
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-        
         <div className="grid place-items-center bg-gray-50 rounded-3xl border-2 border-gray-200 overflow-hidden aspect-square p-8">
-           <img 
-              src={product.image.url} 
-              alt={product.image.alt} 
-              className="col-start-1 row-start-1 w-full h-full object-contain"
-            />
-            {hasDiscount && (
-              <div className="col-start-1 row-start-1 justify-self-end self-start mt-4 mr-4 bg-red-500 text-white text-lg font-black uppercase px-4 py-2 rounded-full shadow-md z-10">
-                -{discountPercentage}%
-              </div>
-            )}
+          <img
+            src={product.image.url}
+            alt={product.image.alt}
+            className="col-start-1 row-start-1 w-full h-full object-contain"
+          />
+          {hasDiscount && (
+            <div className="col-start-1 row-start-1 justify-self-end self-start mt-4 mr-4 bg-red-500 text-white text-lg font-black uppercase px-4 py-2 rounded-full shadow-md z-10">
+              -{discountPercentage}%
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-6 justify-center">
-          
           {product.tags && product.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {product.tags.map(tag => (
-                <span key={tag} className="bg-indigo-100 text-indigo-900 px-3 py-1 rounded-full text-sm font-bold capitalize">
+              {product.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-indigo-100 text-indigo-900 px-3 py-1 rounded-full text-sm font-bold capitalize">
                   {tag}
                 </span>
               ))}
@@ -132,7 +138,9 @@ function ProductPage() {
           )}
 
           <div>
-            <h1 id="product-title" className="text-4xl lg:text-5xl font-black text-indigo-950 tracking-tight mb-4">
+            <h1
+              id="product-title"
+              className="text-4xl lg:text-5xl font-black text-indigo-950 tracking-tight mb-4">
               {product.title}
             </h1>
             <div className="flex items-center gap-2 text-lg font-bold text-amber-600">
@@ -168,43 +176,52 @@ function ProductPage() {
             )}
           </div>
 
-
           <button
             onClick={handleAddToCart}
             aria-live="polite"
-            aria-label={added ? 'Product added to cart' : 'Add product to cart'}
+            aria-label={added ? "Product added to cart" : "Add product to cart"}
             className={`mt-4 w-full md:w-auto px-10 py-4 rounded-xl text-xl font-black transition-colors shadow-md hover:shadow-xl ${
-              added 
-                ? 'bg-green-600 text-white hover:bg-green-700' 
-                : 'bg-orange-500 text-white hover:bg-indigo-900'
+              added
+                ? "bg-green-600 text-white hover:bg-green-700"
+                : "bg-orange-500 text-white hover:bg-indigo-900"
             }`}>
-            {added ? '✓ Added to Cart!' : 'Add to Cart'}
+            {added ? "✓ Added to Cart!" : "Add to Cart"}
           </button>
         </div>
       </div>
 
       <div className="bg-white rounded-3xl border-2 border-gray-200 p-8 md:p-12 mt-8">
-        <h2 className="text-2xl font-black text-indigo-950 mb-8">Customer Reviews</h2>
-        
+        <h2 className="text-2xl font-black text-indigo-950 mb-8">
+          Customer Reviews
+        </h2>
+
         {product.reviews && product.reviews.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {product.reviews.map(review => (
-              <div key={review.id} className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col gap-2">
+            {product.reviews.map((review) => (
+              <div
+                key={review.id}
+                className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col gap-2">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-gray-900 text-lg">{review.username}</span>
-                  <span className="text-amber-500 font-bold bg-amber-50 px-2 py-1 rounded">⭐ {review.rating}</span>
+                  <span className="font-bold text-gray-900 text-lg">
+                    {review.username}
+                  </span>
+                  <span className="text-amber-500 font-bold bg-amber-50 px-2 py-1 rounded">
+                    ⭐ {review.rating}
+                  </span>
                 </div>
                 <p className="text-gray-600 italic">"{review.description}"</p>
               </div>
             ))}
           </div>
         ) : (
-          <p role="status" aria-live="polite" className="text-gray-500 italic text-lg">
+          <p
+            role="status"
+            aria-live="polite"
+            className="text-gray-500 italic text-lg">
             No reviews yet for this product.
           </p>
         )}
       </div>
-
     </div>
   );
 }
